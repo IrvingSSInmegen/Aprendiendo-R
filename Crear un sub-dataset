@@ -1,0 +1,43 @@
+### import education expenditure data set and assign column names
+education <- read.csv("https://vincentarelbundock.github.io/Rdatasets/csv/robustbase/education.csv", stringsAsFactors = FALSE)
+colnames(education) <- c("X","State","Region","Urban.Population","Per.Capita.Income","Minor.Population","Education.Expenditures")
+View(education)
+
+boxplot(education)
+#se quiere ver cuanto gasta el estado por niño (¿media?)
+#solo se requieren algunos datos 
+#una manera de extraer solo los datos necesario sería
+
+
+
+ed_exp1 <- education[c(10:21),c(2,6:7)]  #crea un nuevo data.frame subconjunto del orginal
+                                         #toma las filas del 10 al 21
+                                         #y solo las columnas 2, 6 y 7
+                                         #6:7
+ed_exp1
+
+#otra forma de crear una nuevo data.frame es omitir lo que no se requiera
+# el simbolo de "-" elimina
+
+ed_exp2 <- education[-c(1:9,22:50),-c(1,3:5)]
+ed_exp2
+
+
+##la forma mas secilla de hacer el data.frame para no buscar como menso
+
+ed_exp3 <- education[which(education$Region == 2),
+                     names(education) %in% c("State","Minor.Population","Education.Expenditures")]
+ed_exp3
+
+#########
+
+ed_exp4 <- subset(education, Region == 2, select = c("Minor.Population","Education.Expenditures"))
+ed_exp4
+prueba<- data.frame(ed_exp4)
+boxplot(prueba)
+
+
+#########
+install.packages("dplyr")
+library(dplyr)
+ed_exp5 <- select(filter(education, Region == 2),c(State,Minor.Population:Education.Expenditures))
