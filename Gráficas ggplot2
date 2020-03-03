@@ -1,0 +1,325 @@
+#Datos calidad de aire en NY.
+#A data frame with 153 observations on 6 variables.
+#Convertiremos el mes en un factor etiquetado para usarlo como nuestra variable de agrupación.
+
+rm(list = ls())
+library(datasets)
+library(ggplot2)
+
+data(airquality)
+airquality$Month <- factor(airquality$Month,
+                           labels = c("May", "Jun", "Jul", "Aug", "Sep"))
+
+# Basic boxplot
+# le decimos a ggplot cuales son nuestros datos
+# le decimos que va en el eje "x" y que va en el eje "y"
+# Luego le indicamos a ggplot que represente esto como un
+# diagrama de caja agregando la opción geom_boxplot ().
+
+p10 <- ggplot(airquality, aes(x = Month, y = Ozone)) +
+  geom_boxplot()
+p10
+
+
+# Customising axis labels
+# Cambiar las etiquetas del eje, en este caso utilizamos las opciones
+# scale_x_discrete y scale_y_continuius
+# en cada uno se agrega el nombre deseado al argumento del nombre como una cadena.
+
+p10 <- p10 + scale_x_discrete(name = "Month") +
+  scale_y_continuous(name = "Mean ozone in parts per billion")
+p10
+
+#nombre en varias lineas.
+
+p10 <- p10 + scale_y_continuous(name = "Mean ozone in\nparts per billion")
+p10
+
+# Changing axis ticks (¿¿cambiando la graduación??)
+
+p10 <- p10 + scale_y_continuous(name = "Mean ozone in\nparts per billion",
+                                breaks = seq(0, 175, 25),
+                                limits=c(0, 175))
+p10
+
+# Adding a title( título)
+# incluímos la opción ggtitle se incluye el nombre del gráfico como un argumento de cadena.
+
+p10 <- p10 + ggtitle("Boxplot of mean ozone by month")
+p10
+
+# Changing the colour of the boxes
+# El color se define afuera, ¿ Es mas fácil si se quiere cambiar?
+
+fill <- "gold1"
+line <- "goldenrod2"
+
+p10 <- ggplot(airquality, aes(x = Month, y = Ozone)) +
+  geom_boxplot(fill = fill, colour = line) +
+  scale_y_continuous(name = "Mean ozone in\nparts per billion",
+                     breaks = seq(0, 175, 25),
+                     limits=c(0, 175)) +
+  scale_x_discrete(name = "Month") +
+  ggtitle("Boxplot of mean ozone by month")
+p10
+
+# Otra manera de  poner los colores (#FFFFFF)
+
+fill <- "#4271AE"
+line <- "#1F3552"
+
+p10 <- ggplot(airquality, aes(x = Month, y = Ozone)) +
+  geom_boxplot(fill = fill, colour = line) +
+  scale_y_continuous(name = "Mean ozone in\nparts per billion",
+                     breaks = seq(0, 175, 25),
+                     limits=c(0, 175)) +
+  scale_x_discrete(name = "Month") +
+  ggtitle("Boxplot of mean ozone by month")
+p10
+
+# Transparencia de las cajas
+# Utilizando el argumaneto alpha dentro de geom_boxplot() variando de 0 a 1.
+
+p10 <- ggplot(airquality, aes(x = Month, y = Ozone)) +
+  geom_boxplot(fill = fill, colour = line,
+               alpha = 0.7) +
+  scale_y_continuous(name = "Mean ozone in\nparts per billion",
+                     breaks = seq(0, 175, 25),
+                     limits=c(0, 175)) +
+  scale_x_discrete(name = "Month") +
+  ggtitle("Boxplot of mean ozone by month")
+p10
+
+# Cabiar apariencia de los valores atípicos (¿valos extremos?)
+# Usar los argumentos outlier.colour y outlier.shape dentro de geom_bosplot
+# Debido a que no existe un argumento de "relleno" para valores atípicos
+# no se pueden crear circulos con colorews de contorno y relleno separados
+# En este ejemplo se hacen los valores atípicos sean pequeños círculos solidos usando outlier.shape=20
+# ya esta establecido el valor de cada figura
+# http://sape.inf.usi.ch/quick-reference/ggplot2/shape
+# y serán del mismo color que las líneas de la caja usando outlier.colour="#1F3552"
+
+p10 <- ggplot(airquality, aes(x = Month, y = Ozone)) +
+  geom_boxplot(fill = fill, colour = line, alpha = 0.7,
+               outlier.colour = "#1F3552", outlier.shape = 20) +
+  scale_y_continuous(name = "Mean ozone in\nparts per billion",
+                     breaks = seq(0, 175, 25),
+                     limits=c(0, 175)) +
+  scale_x_discrete(name = "Month") +
+  ggtitle("Boxplot of mean ozone by month")
+p10
+
+# Using the white theme
+# Se usará una personalización simple agregando theme_bw()
+# Se puede ajustar más el gráfico usando la opción theme
+ 
+p10 <- p10 + theme_bw()
+p10
+
+# Creating an XKCD style chart (tabla de estilo XKCD)
+# ejemplo de
+
+library(extrafont)
+
+download.file("http://simonsoftware.se/other/xkcd.ttf",
+              dest="xkcd.ttf", mode="wb")
+system("mkdir ~/.fonts")
+system("cp xkcd.ttf  ~/.fonts")
+font_import(paths = "~/.fonts", pattern="[X/x]kcd")
+fonts()
+loadfonts()
+
+p10 <- ggplot(airquality, aes(x = Month, y = Ozone)) +
+  geom_boxplot(colour = "black", fill = "#56B4E9") +
+  scale_y_continuous(name = "Mean ozone in\nparts per billion",
+                     breaks = seq(0, 175, 25),
+                     limits=c(0, 175)) +
+  scale_x_discrete(name = "Month") +
+  ggtitle("Boxplot of mean ozone by month") +
+  theme(axis.line.x = element_line(size = 0.5, colour = "black"),
+        axis.line.y = element_line(size = 0.5, colour = "black"),
+        axis.line = element_line(size=1, colour = "black"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank(),
+        panel.background = element_blank(),
+        plot.title=element_text(size = 20, family="xkcd-Regular"),
+        text=element_text(size = 16, family="xkcd-Regular"),
+        axis.text.x=element_text(colour="black", size = 12),
+        axis.text.y=element_text(colour="black", size = 12))
+p10
+#Problema con la fuente? debería parecerse a comic sans
+
+# Using ‘The Economist’ theme
+
+library(ggthemes)
+library(grid)
+
+fill <- "#4271AE"
+line <- "#1F3552"
+
+p10 <- ggplot(airquality, aes(x = Month, y = Ozone)) +
+  geom_boxplot(fill = fill, colour = line) +
+  scale_y_continuous(name = "Mean ozone in\nparts per billion",
+                     breaks = seq(0, 175, 25),
+                     limits=c(0, 175)) +
+  scale_x_discrete(name = "Month") +
+  ggtitle("Boxplot of mean ozone by month") +
+  theme_economist() +
+  theme(axis.line.x = element_line(size = 0.5, colour = "black"),
+        axis.line.y = element_line(size = 0.5, colour = "black"),
+        legend.position = "bottom", legend.direction = "horizontal",
+        legend.box = "horizontal",
+        legend.key.size = unit(1, "cm"),
+        plot.title = element_text(family="Tahoma"),
+        text = element_text(family = "Tahoma"),
+        axis.title = element_text(size = 12),
+        legend.text = element_text(size = 9),
+        legend.title=element_text(face = "bold", size = 9))
+p10
+
+# Más modificaciones
+
+library(grid)
+
+fill <- "#4271AE"
+lines <- "#1F3552"
+
+p10 <- ggplot(airquality, aes(x = Month, y = Ozone)) +
+  geom_boxplot(colour = lines, fill = fill,
+               size = 1) +
+  scale_y_continuous(name = "Mean ozone in\nparts per billion",
+                     breaks = seq(0, 175, 25),
+                     limits=c(0, 175)) +
+  scale_x_discrete(name = "Month") +
+  ggtitle("Boxplot of mean ozone by month") +
+  theme_bw() +
+  theme(panel.grid.major = element_line(colour = "#d3d3d3"),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank(),
+        panel.background = element_blank(),
+        plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
+        text=element_text(family = "Tahoma"),
+        axis.title = element_text(face="bold"),
+        axis.text.x = element_text(colour="black", size = 11),
+        axis.text.y = element_text(colour="black", size = 9),
+        axis.line = element_line(size=0.5, colour = "black"))
+p10
+
+# Boxplot extras
+# Se pueden superponer todos los puntos para ese grupo en cada diagrama de caja
+# para tener una idea del tamaño de la muestra del grupo
+# Se logra utilizando la opción geom_jitter
+
+p10 <- p10 + geom_jitter()
+p10
+
+# Un poco mas de cambios
+# Se observa que junio tiene una muestra pequeña, lo cual indica que la informacion 
+# puede no ser confiable.
+# 
+# Agregar muesca al cuadro donde se encuentra la mediana para dar 
+# una indicación visual más clara de como se distribuyen los datos 
+# dentro del IQR (El rango intercuartílico)
+# Se logra agregando el argumento notch = TRUE en geom_boxplot()
+# Observar el cambio de junio.
+
+p10 <- ggplot(airquality, aes(x = Month, y = Ozone)) +
+  geom_boxplot(colour = lines, fill = fill,
+               size = 1, notch = TRUE) +
+  scale_y_continuous(name = "Mean ozone in\nparts per billion",
+                     breaks = seq(0, 175, 25),
+                     limits=c(0, 175)) +
+  scale_x_discrete(name = "Month") +
+  ggtitle("Boxplot of mean ozone by month") +
+  theme_bw() +
+  theme(panel.grid.major = element_line(colour = "#d3d3d3"),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank(), panel.background = element_blank(),
+        plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
+        text=element_text(family="Tahoma"),
+        axis.title = element_text(face="bold"),
+        axis.text.x=element_text(colour="black", size = 11),
+        axis.text.y=element_text(colour="black", size = 9),
+        axis.line = element_line(size=0.5, colour = "black"))
+p10
+
+# Grouping by another variable (agrupar por otra variable)
+# Agrupar diargamas de caja por los niveles de otra variable
+# Hay dos opciones en diferentes plots o en el mismo.
+# En el ejemplo:
+# Solo se toman en cuenta los meses julio, agosto y sep
+# en un nuevo dataset airquality_trimmed
+# tambien se divide la temperatura de forma categorica y se convierte en una
+# nueva variable de factor etiquetdada Temp.f
+# Por último para producir el gráfico agregamos la opción facet_grid(.~Temp.f) al gráfico.
+
+
+airquality_trimmed <- airquality[which(airquality$Month == "Jul" |
+                                         airquality$Month == "Aug" |
+                                         airquality$Month == "Sep"), ]
+airquality_trimmed$Temp.f <- factor(ifelse(airquality_trimmed$Temp > mean(airquality_trimmed$Temp), 1, 0),
+                                    labels = c("Low temp", "High temp"))
+
+p10 <- ggplot(airquality_trimmed, aes(x = Month, y = Ozone)) +
+  geom_boxplot(fill = fill, colour = line,
+               alpha = 0.7) +
+  scale_y_continuous(name = "Mean ozone in\nparts per billion",
+                     breaks = seq(0, 175, 50),
+                     limits=c(0, 175)) +
+  scale_x_discrete(name = "Month") +
+  ggtitle("Boxplot of mean ozone by month") +
+  theme_bw() +
+  theme(plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
+        text = element_text(size = 12, family = "Tahoma"),
+        axis.title = element_text(face="bold"),
+        axis.text.x=element_text(size = 11)) +
+  facet_grid(. ~ Temp.f)
+p10
+
+# Lo anterios nos da los dos ploteos en diferentes esquemas
+
+# Para poner los dos juntos en un mismo esquema.
+# 1.- En la función ggplot, agregamos un argumento fill = Temp.f dentro de aes()
+# 2.- Personalizar colores, agregando el scale_fill_brewer
+#     a la gráfica desde el paquete RColorbrewer
+
+
+library(RColorBrewer)
+
+p10 <- ggplot(airquality_trimmed, aes(x = Month, y = Ozone, fill = Temp.f)) +
+  geom_boxplot(alpha=0.7) +
+  scale_y_continuous(name = "Mean ozone in\nparts per billion",
+                     breaks = seq(0, 175, 25),
+                     limits=c(0, 175)) +
+  scale_x_discrete(name = "Month") +
+  ggtitle("Boxplot of mean ozone by month") +
+  theme_bw() +
+  theme(plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
+        text = element_text(size = 12, family = "Tahoma"),
+        axis.title = element_text(face="bold"),
+        axis.text.x=element_text(size = 11)) +
+  scale_fill_brewer(palette = "Accent")
+p10
+
+# Formatting the legend (formatear la leyenda)
+# 1.-Cambiar posición agregando el argumento legend.position= "bottom" en la opción theme
+#    mueve la leyenda debajo del trama.
+# 2.-Arreglar el título agregando la opción de labs(fill = "Temperature") a la gráfica.
+
+p10 <- ggplot(airquality_trimmed, aes(x = Month, y = Ozone, fill = Temp.f)) +
+  geom_boxplot(alpha=0.7) +
+  scale_y_continuous(name = "Mean ozone in\nparts per billion",
+                     breaks = seq(0, 175, 25),
+                     limits=c(0, 175)) +
+  scale_x_discrete(name = "Month") +
+  ggtitle("Boxplot of mean ozone by month") +
+  theme_bw() +
+  theme(plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
+        text = element_text(size = 12, family = "Tahoma"),
+        axis.title = element_text(face="bold"),
+        axis.text.x=element_text(size = 11),
+        legend.position = "bottom") +
+  scale_fill_brewer(palette = "Accent") +
+  labs(fill = "Temperature")
+p10
