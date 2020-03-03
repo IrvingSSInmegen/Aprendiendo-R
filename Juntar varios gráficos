@@ -1,0 +1,55 @@
+# juntar varios gráficos.
+#creamos datos para ilustrar el tutorial.
+
+x = c(3,3,5,8,10,7,4,6,8,10)
+y = c(15,45,44,40,35,33,30,27,22,16)
+z = rep((c("A","B")),c(5,5))
+
+df=data.frame(x,y,z) 
+df
+
+dev.off() # Desactivamos todas las ventanas gráficas o dispositivos
+
+x11() # Abrimos el primer dispositivo
+
+matrix(c(1:4), nrow=2, byrow=FALSE)
+
+layout(matrix(c(1:4), nrow=2, byrow=FALSE))
+
+layout.show(4) # Muestra las cuatro particiones
+
+#############################################################
+# Nombrar las configuraciones para despues ponerlas
+
+Conf2x2 = matrix(c(1:4), nrow=2, byrow=FALSE)
+Conf2x2
+
+Conf3x2 = matrix(c(1:6), nrow=2, byrow=TRUE)
+Conf3x2
+
+layout(Conf3x2)
+layout.show(6)
+
+layout(Conf2x2)
+layout.show(4)
+
+# Ejemeplo
+
+x11()
+
+layout(Conf2x2)
+layout.show(6)
+
+plot(df$x, df$y) # Scatter plot.
+
+boxplot(df$x) # Diagrama de cajas y bigotes o boxplot.
+
+boxplot(df$x ~ df$z) # Diagrama de cajas y bigotes o boxplot en función de una variable con dos niveles.
+
+barplot(df$x) # Diagrama de barras
+
+qqnorm(df$x) # Compara la distribución de datos con los valores teóricos de una distribucion normal
+
+qqline(df$x) # Añade una linea.
+
+hist(df$x) # Histograma.
