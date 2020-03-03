@@ -1,0 +1,121 @@
+################################################
+#  estadisticas
+
+# diagramas de caja= 
+#                   Son muy útiles para comparar una variable en doferentes grupos
+#     
+# curtiles= Son los elementos de un conjuntos de datos ordenados los cuales
+#           dividen al conjunto de datos en 4 partes iguales.
+#        Se calcula:
+#                  Q1: (N+1)/4
+#                  Q3: 3(N+1)/4
+#                 Si no es decimal: se elije ese sujeto.
+#                 Si es decimal: de la forma i.ddddd
+#                                entonces cae entre le sujerto Xi y Xi+1
+#                                y asi Qj=Xi+d(Xi+1-Xi)
+#          
+# media aritmetica= Datos no ordenados
+#                   La media del gen que se expresa respecto a todas las  muestras
+#                   ¿hay casos en donde varios genes se expresen en misma cantidad?
+#       Se calcula:
+#                  sumas de todos los datos/ total de datos
+# mediana= Ordena los datos de menor a mayor y despues calculas
+
+#     Se calcula: 
+#               Si N es impar: es el dato que separa a la mitad
+#               Si N es par: es la media de los valores al centro
+#                            (X1+X2)/2
+
+# Crear base de datos falsa con la función rnorm()
+# rnorm()= Genera secuencias aleatorias de distribucion normal
+#          requieres tres argumentos: 1)número de muestras a crear 
+#                                     2)la media de todos los datos
+#                                     3) the standard deviation of the distribution
+#                                       desviacion estandar: que tan dispersos estan los
+#                                                           datos respecto a la media.
+
+# Ejemplo ver evolucion de 3 estaciones en un periodo de 3 dias.
+rnorm(n=100,mean=3,sd=1)
+
+# Para generar la dataset se usa el siguiente código
+# No crea  data.frame( marco de datos) con 12 columnas
+
+data<-data.frame(Stat11=rnorm(100,mean=3,sd=2),
+                 Stat21=rnorm(100,mean=4,sd=1),
+                 Stat31=rnorm(100,mean=6,sd=0.5),
+                 Stat41=rnorm(100,mean=10,sd=0.5),
+                 Stat12=rnorm(100,mean=4,sd=2),
+                 Stat22=rnorm(100,mean=4.5,sd=2),
+                 Stat32=rnorm(100,mean=7,sd=0.5),
+                 Stat42=rnorm(100,mean=8,sd=3),
+                 Stat13=rnorm(100,mean=6,sd=0.5),
+                 Stat23=rnorm(100,mean=5,sd=3),
+                 Stat33=rnorm(100,mean=8,sd=0.2),
+                 Stat43=rnorm(100,mean=4,sd=4))
+data
+
+# Para la creación del box-plot usamos la funcion boxplot() y llamamos a nuestro dataset
+# como unico argumento
+
+boxplot(data)
+
+# poner nombres de forma vertical
+
+boxplot(data,las = 2)
+
+# Cambiar los nombres usando la opcion names= c()meter los nombres por orden en que van
+# las columnas
+
+boxplot(data, las = 2, names = c("Station 1","Station 2","Station 3",
+                                 "Station 4","Station 1","Station 2",
+                                 "Station 3","Station 4","Station 1",
+                                 "Station 2","Station 3","Station 4"))
+
+# Si los nombres son muy largos se pueden ajustar usando la opcion
+# par(mar= c(arr, izq,aba,der)+ "el ajuste de centrado creo")
+
+boxplot(data, las = 2, par(mar = c(5, 3, 2, 1)+ 0.5),
+          names = c("Station 1","Station 2","Station 3",
+                  "Station 4","Station 1","Station 2",
+                  "Station 3","Station 4","Station 1",
+                  "Station 2","Station 3","Station 4"))
+
+
+# Agrupar los datos a nuestro gusto
+#at =c(1,2,3,4, 6,7,8,9, 11,12,13,14) Se da la posicion en el eje "x" y se hace un salto
+# donde se quiere separar.
+
+boxplot(data, las = 2, par(mar = c(5, 3, 2, 1)+ 0.5),
+        at =c(1,2,3,4, 6,7,8,9, 11,12,13,14),
+        names = c("Station 1","Station 2","Station 3",
+                  "Station 4","Station 1","Station 2",
+                  "Station 3","Station 4","Station 1",
+                  "Station 2","Station 3","Station 4"))
+#agregar color: se puede poner color por nombre o por numero
+#revisar en internet.
+
+# col =c(“red”,“sienna”,“palevioletred1”,“royalblue2”,“red”,“sienna”,“palevioletred1”, 
+#   “royalblue2”,“red”,“sienna”,“palevioletred1”,“royalblue2”)
+
+boxplot(data, las = 2, par(mar = c(5, 3, 2, 1)+ 0.5),
+        col =c("#cb3234","sienna","palevioletred1","royalblue2",
+               "red","sienna","palevioletred1","royalblue2",
+               "red","sienna","palevioletred1","royalblue2"),
+        at =c(1,2,3,4, 6,7,8,9, 11,12,13,14),
+        names = c("Station 1","Station 2","Station 3",
+                  "Station 4","Station 1","Station 2",
+                  "Station 3","Station 4","Station 1",
+                  "Station 2","Station 3","Station 4"))
+
+# Agregar nombre a los ejes ylab =“Oxigen (%)”, xlab =“Time”
+
+boxplot(data, las = 2, par(mar = c(8, 4, 2, 1)+ 0.5),
+        ylab ="Oxigen (%)", xlab ="Time",
+        col =c("red","sienna","palevioletred1","royalblue2",
+               "red","sienna","palevioletred1","royalblue2",
+               "red","sienna","palevioletred1","royalblue2"),
+        at =c(1,2,3,4, 6,7,8,9, 11,12,13,14),
+        names = c("Station 1","Station 2","Station 3",
+                  "Station 4","Station 1","Station 2",
+                  "Station 3","Station 4","Station 1",
+                  "Station 2","Station 3","Station 4"))
