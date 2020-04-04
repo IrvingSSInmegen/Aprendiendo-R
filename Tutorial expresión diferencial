@@ -211,15 +211,14 @@ boxplot(cajita.1,las = 2,main="Sanos")
 
 
 
-
-boxplot(cajita ~ cajita.1)
-
-
+########################################################################################################
 ########################################################################################################
 # Poner boxplot juntos para comparar
 
 EvsS <- read.csv("GSE37704_featurecounts.csv", stringsAsFactors = FALSE)
 colnames(EvsS) <- c("GEN","LONG","ENF1","ENF2","ENF3","SAN1","SAN2","SAN3")
+View(EvsS)
+
 #  comparación entre los genes 
 
 #  Gen ENSG00000183508
@@ -245,19 +244,74 @@ En4 <- subset(EvsS, GEN == "ENSG00000150938" , select = c("ENF1","ENF2","ENF3"))
 En44 <- data.frame(t(En4))
 San4 <- subset(EvsS, GEN == "ENSG00000150938" , select = c("SAN1","SAN2","SAN3"))
 San44 <- data.frame(t(San4))
+#
+# Gen ENSG00000116016
+En5 <- subset(EvsS, GEN == "ENSG00000116016" , select = c("ENF1","ENF2","ENF3"))
+En55 <- data.frame(t(En5))
+San5 <- subset(EvsS, GEN == "ENSG00000116016" , select = c("SAN1","SAN2","SAN3"))
+San55 <- data.frame(t(San5))
 
+#  Gen ENSG00000166507
+En6 <- subset(EvsS, GEN == "ENSG00000166507" , select = c("ENF1","ENF2","ENF3"))
+En66 <- data.frame(t(En6))
+San6 <- subset(EvsS, GEN == "ENSG00000166507" , select = c("SAN1","SAN2","SAN3"))
+San66 <- data.frame(t(San6))
+# 
+#  Gen ENSG00000175279
+En7 <- subset(EvsS, GEN == "ENSG00000175279" , select = c("ENF1","ENF2","ENF3"))
+En77 <- data.frame(t(En7))
+San7 <- subset(EvsS, GEN == "ENSG00000175279" , select = c("SAN1","SAN2","SAN3"))
+San77 <- data.frame(t(San7))
+#
+#  Gen ENSG00000133997
+En8 <- subset(EvsS, GEN == "ENSG00000133997" , select = c("ENF1","ENF2","ENF3"))
+En88 <- data.frame(t(En8))
+San8 <- subset(EvsS, GEN == "ENSG00000133997" , select = c("SAN1","SAN2","SAN3"))
+San88 <- data.frame(t(San8))
+#
+#  Gen ENSG00000160948
+En9 <- subset(EvsS, GEN == "ENSG00000160948" , select = c("ENF1","ENF2","ENF3"))
+En99 <- data.frame(t(En9))
+San9 <- subset(EvsS, GEN == "ENSG00000160948" , select = c("SAN1","SAN2","SAN3"))
+San99 <- data.frame(t(San9))
+#
+# Gen ENSG00000140600
+En10 <- subset(EvsS, GEN == "ENSG00000140600" , select = c("ENF1","ENF2","ENF3"))
+En1010 <- data.frame(t(En10))
+San10 <- subset(EvsS, GEN == "ENSG00000140600" , select = c("SAN1","SAN2","SAN3"))
+San1010 <- data.frame(t(San10))
 
 
 x11()
-Conf4x4 = matrix(c(1:8), nrow=2, byrow=TRUE)
-Conf4x4
-layout(Conf4x4)
-layout.show(8)
+Conf5x2 = matrix(c(1:10), nrow=2, byrow=TRUE)
+Conf5x2
+layout(Conf5x2)
+layout.show(10)
 boxplot(En11,las= 2,xlab= "ENSG00000183508",main="Enfermo",col = "red")
-boxplot(San11,las= 2,xlab= "ENSG00000183508",main="Sano",col = "green" )
 boxplot(En22,las= 2,xlab= "ENSG00000117519",main="Enfermo",col = "red")
+boxplot(En33,las= 2,xlab= "ENSG00000159176",main="Enfermo",col = "red")
+boxplot(En44,las= 2,xlab= "ENSG00000150938",main="Enfermo",col = "red")
+boxplot(En55,las= 2,xlab= "ENSG00000116016",main="Enfermo",col = "red")
+boxplot(San11,las= 2,xlab= "ENSG00000183508",main="Sano",col = "green" )
 boxplot(San22,las= 2,xlab= "ENSG00000117519",main="Sano",col = "green" )
-boxplot(En33,las= 2,xlab= "ENSG00000117519",main="Enfermo",col = "red")
-boxplot(San33,las= 2,xlab= "ENSG00000117519",main="Sano",col = "green" )
-boxplot(En44,las= 2,xlab= "ENSG00000117519",main="Enfermo",col = "red")
-boxplot(San44,las= 2,xlab= "ENSG00000117519",main="Sano",col = "green" )
+boxplot(San33,las= 2,xlab= "ENSG00000159176",main="Sano",col = "green" )
+boxplot(San44,las= 2,xlab= "ENSG00000150938",main="Sano",col = "green" )
+boxplot(San55,las= 2,xlab= "ENSG00000116016",main="Sano",col = "green" )
+
+x11()
+Conf5x2 = matrix(c(1:10), nrow=2, byrow=TRUE)
+Conf5x2
+layout(Conf5x2)
+layout.show(10)
+boxplot(En66,las= 2,xlab= "ENSG00000166507",main="Enfermo",col = "red")
+boxplot(En77,las= 2,xlab= "ENSG00000175279",main="Enfermo",col = "red")
+boxplot(En88,las= 2,xlab= "ENSG00000133997",main="Enfermo",col = "red")
+boxplot(En99,las= 2,xlab= "ENSG00000160948",main="Enfermo",col = "red")
+boxplot(En1010,las= 2,xlab= "ENSG00000140600",main="Enfermo",col = "red")
+boxplot(San66,las= 2,xlab= "ENSG00000166507",main="Sano",col = "green" )
+boxplot(San77,las= 2,xlab= "ENSG00000175279",main="Sano",col = "green" )
+boxplot(San88,las= 2,xlab= "ENSG00000133997",main="Sano",col = "green" )
+boxplot(San99,las= 2,xlab= "ENSG00000160948",main="Sano",col = "green" )
+boxplot(San1010,las= 2,xlab= "ENSG00000140600",main="Sano",col = "green" )
+
+
