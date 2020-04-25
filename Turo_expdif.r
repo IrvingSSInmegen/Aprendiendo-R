@@ -1,13 +1,13 @@
-#  La expresi髇 g閚ica diferencial es el proceso mediante el cual 
-#  las c閘ulas son capaces de decodificar la informaci髇 contenida
-#  dentro del material gen閠ico (醕idos nucleicos) para la elaboraci髇
-#  del producto g閚ico necesario para el buen funcionamiento del organismo.
-#  El proceso m醩 utilizado para revelar este producto g閚ico es el 
-#  RNA-Seq, a partir del cual se puede realizar el an醠isis de la 
-#  expresi髇 diferencial que nos permite detectar aquellos genes que 
-#  son diferencialmente expresados con respecto a una condici髇 de control.
-#  ENSG--> 縢enes?
-#  SRR--> 縨uestras(personas)?
+#  La expresi贸n g茅nica diferencial es el proceso mediante el cual 
+#  las c茅lulas son capaces de decodificar la informaci贸n contenida
+#  dentro del material gen茅tico (谩cidos nucleicos) para la elaboraci贸n
+#  del producto g茅nico necesario para el buen funcionamiento del organismo.
+#  El proceso m谩s utilizado para revelar este producto g茅nico es el 
+#  RNA-Seq, a partir del cual se puede realizar el an谩lisis de la 
+#  expresi贸n diferencial que nos permite detectar aquellos genes que 
+#  son diferencialmente expresados con respecto a una condici贸n de control.
+#  ENSG--> 驴genes?
+#  SRR--> 驴muestras(personas)?
 
 #  library() sirve para invocar librerias que va a usar el programa.
 
@@ -21,7 +21,7 @@ library(DESeq2)
 #  file= nombre del archivo que debe estar dentro del directorio donde se trabaja getwd()
 #  header= TRUE, si la primera fila contiene el nombre de las variables
 #          el encabezado se establece en VERDADERO si y solo si la primera fila
-#          contiene un campo menos que el n鷐ero de columnas.
+#          contiene un campo menos que el n煤mero de columnas.
 #  sep= "??" El simboloso que se usa para separar los datos en la base de datos.
 #  dec="." el caracter utilizado en el archivo para puntos decimales.
 #  fill=TRUE si las filas tienen logitud desigual se rellenan automatico.
@@ -40,7 +40,7 @@ colData = read.csv(file = "GSE37704_metadata.csv", row.names=1)
 colData
 
 # Set up the DESeqDataSet Object and run the DESeq pipeline
-#Convierte en una clase de matriz espec韋ica.
+#Convierte en una clase de matriz espec铆fica.
 
 dds = DESeqDataSetFromMatrix(countData=countData,
                              colData=colData,
@@ -49,19 +49,19 @@ dds = DESeq(dds)
 dds
 
 #  Resultado: HoxA1 vs siRNA (dos tipos de muestras)
-#  HoxA1--> (prote韓a)
+#  HoxA1--> (prote铆na)
 #  siRNA-->(ARN de silenciamiento)
 #  p-value--->se define como la probabilidad de que un valor 
-#             estad韘tico calculado sea posible dada una hip髏esis nula cierta.
-#             En t閞minos simples, el valor p ayuda a diferenciar resultados
+#             estad铆stico calculado sea posible dada una hip贸tesis nula cierta.
+#             En t茅rminos simples, el valor p ayuda a diferenciar resultados
 #             que son producto del azar del muestreo, de resultados que son 
-#             estad韘ticamente significativos.
-#             Si el valor p cumple con la condici髇 de ser menor que un nivel 
+#             estad铆sticamente significativos.
+#             Si el valor p cumple con la condici贸n de ser menor que un nivel 
 #             de significancia impuesto arbitrariamente, este se considera 
 #             como un resultado estadisticamente significativo y, por lo tanto,
-#             permite rechazar la hip髏esis nula.
+#             permite rechazar la hip贸tesis nula.
 #             p-value=P(resultado extremo|Hip-null)
-#  genes are up o down (縜pagados o prendidos?). Mas expresados unos que otros.
+#  genes are up o down (驴apagados o prendidos?). Mas expresados unos que otros.
 
 res = results(dds, contrast=c("condition", "hoxa1_kd", "control_sirna"))
 res = res[order(res$pvalue),]
@@ -69,15 +69,15 @@ summary(res)
 
 ###########################################################################################
 
-#  Dado que mapeamos y contamos contra la anotaci髇 Ensembl,
-#  nuestros resultados solo tienen informaci髇 sobre las ID de genes Ensembl.
+#  Dado que mapeamos y contamos contra la anotaci贸n Ensembl,
+#  nuestros resultados solo tienen informaci贸n sobre las ID de genes Ensembl.
 #  Agregamos una base de datos.
 
 library("AnnotationDbi")
 library("org.Hs.eg.db")
 columns(org.Hs.eg.db)
 
-# el simbolo $ toma de res una columna en espec韋ico.
+# el simbolo $ toma de res una columna en espec铆fico.
 res$symbol = mapIds(org.Hs.eg.db,
                     keys=row.names(res), 
                     column="SYMBOL",
@@ -96,7 +96,7 @@ res$name =   mapIds(org.Hs.eg.db,
 
 head(res, 10)
 
-#  Interpretaci髇 de resultados?? 
+#  Interpretaci贸n de resultados?? 
 #  Solo muestras 10 genes mas expresados?
 
 ###########################################################################################
@@ -223,7 +223,7 @@ EvsS <- read.csv("GSE37704_featurecounts.csv", stringsAsFactors = FALSE)
 colnames(EvsS) <- c("GEN","LONG","ENF1","ENF2","ENF3","SAN1","SAN2","SAN3")
 View(EvsS)
 
-#  comparaci髇 entre los genes 
+#  comparaci贸n entre los genes 
 
 #  Gen ENSG00000183508
 En1 <- subset(EvsS, GEN == "ENSG00000183508" , select = c("ENF1","ENF2","ENF3"))
