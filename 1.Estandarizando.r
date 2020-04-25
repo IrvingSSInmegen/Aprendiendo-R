@@ -1,6 +1,6 @@
             ############################################
             ####                                    ####
-            ####   Métodos de standarizar valores   ####
+            ####   MÃ©todos de standarizar valores   ####
             ####                                    ####
             ############################################
 
@@ -14,25 +14,25 @@ dat <- data.frame(x = rnorm(10, 30, .2), y = runif(10, 3, 5))
 View(dat)
 
 #   Lo anterior crea una matriz de 2x10
-#   la columna x : rnorm <- da 10 valores aleatorios con distribución normal
-#                          alrededor del 30 con una desviación standar de .2
-#   la columna y : runif <- da 10 valores aleatorios con distribución uniforme 
+#   la columna x : rnorm <- da 10 valores aleatorios con distribuciÃ³n normal
+#                          alrededor del 30 con una desviaciÃ³n standar de .2
+#   la columna y : runif <- da 10 valores aleatorios con distribuciÃ³n uniforme 
 #                            con min de 3 y max de 5
 
 scaled.dat <- scale(dat) 
 View(scaled.dat)
 
-#   scale <- centra o escala los valores de las columnas de una matriz numérica.
-#            pero con media 0 y desviación estandar de 1
-#   Nota: En el ejemplo cambió el nombre de la primera columna a scaled.dat.
-#   usar ?scale para ver el método que se utiliza para escalar o centrar.
+#   scale <- centra o escala los valores de las columnas de una matriz numÃ©rica.
+#            pero con media 0 y desviaciÃ³n estandar de 1
+#   Nota: En el ejemplo cambiÃ³ el nombre de la primera columna a scaled.dat.
+#   usar ?scale para ver el mÃ©todo que se utiliza para escalar o centrar.
 
 # check that we get mean of 0 and sd of 1 
 colMeans(scaled.dat)  
 apply(scaled.dat, 2, sd) 
 View(scaled.dat)
 
-#   Parece que suma los datos de las columnas ¿Para...?   
+#   Parece que suma los datos de las columnas Â¿Para...?   
 
 ##########################################
 ####   Lo que quiero estandarizar    #####
@@ -49,7 +49,7 @@ View(cajita.stn1)
 
 #   Nota: depende de como este acomodada escala los valores de diferente manera  
 #         hay columnas que quedan con diferentes rangos.                          
-#   Nota: Para los heatmaps ¿requiero todos los valores de la matriz dentro del   
+#   Nota: Para los heatmaps Â¿requiero todos los valores de la matriz dentro del   
 #         mismo rango?.   
 
 EnfySan.stn <- scale(EandS)                                                   
@@ -62,7 +62,7 @@ View(EnfySan.stn)
 Enfysan.stn.t <- scale(t(EandS))
 View(Enfysan.stn.t)
 
-#   Nota: ¿Necesito los genes como columna o fila?
+#   Nota: Â¿Necesito los genes como columna o fila?
 #         Depende de como los pidan heatmap.2
 
 ###################################            
@@ -76,7 +76,7 @@ preObj <- preProcess(dat, method=c("center", "scale"),rangeBounds = c(-1, 1))
 newData <- predict(preObj, dat)
 View(newData)
 #   Nota: no logro poner los datos en un mismo rango
-#         ¿rangeBounds?
+#         Â¿rangeBounds?
 
 #########################################
 ####   Lo que quiero standarizar    #####
@@ -165,8 +165,8 @@ for(i in 1:length(colnames(EandS))) {
 
 View(EandS)
 
-#   Nota: Faltaría encontrar la forma de limitar el rango []
-#   No es tan útil, pierdes el dataframe original ya que no se le asiga
+#   Nota: FaltarÃ­a encontrar la forma de limitar el rango []
+#   No es tan Ãºtil, pierdes el dataframe original ya que no se le asiga
 #   nuevo nombre al dataframe normalizado
 
 
