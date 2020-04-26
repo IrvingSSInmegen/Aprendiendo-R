@@ -1,7 +1,7 @@
 ##################################
 ##################################
 ###########            ###########
-##########   MÓDULO 1   ##########
+##########   MÃ“DULO 1   ##########
 ###########            ###########
 ##################################
 ##################################
@@ -29,7 +29,7 @@ read.table(file = ,header = ,sep = ,quote = ,row.names =,col.names = ,skip = ,nr
            ,dec = ,numerals = ,as.is = ,na.strings = ,colClasses = ,check.names = ,fill = 
            ,strip.white = ,blank.lines.skip = ,comment.char = ,allowEscapes = ,flush = ,fileEncoding = 
            ,encoding = ,text = ,skipNul = )
-#Si damos tabulador dentro de la función nos da todas las opciones que ofrece la funcion a usar.
+#Si damos tabulador dentro de la funciÃ³n nos da todas las opciones que ofrece la funcion a usar.
 #Hay que poner las condiciones necesarias para que nuestro dataframe salga bien.
 
 my_iris <- read.table(file ="https://raw.githubusercontent.com/INMEGEN/CienciaDeDatosConR/master/data/iris_01.csv",
@@ -42,19 +42,19 @@ head(my_iris)
 #head() muestra los primeros 6 valores de la tabla de datos.
 
 str(object = my_iris)  
-# Muestra información sobre la tabla de datos
+# Muestra informaciÃ³n sobre la tabla de datos
 
 summary(object = my_iris)
-# Arroja información estadistica sobre cada columna que tenga valores numéricos
-# y al parecer en los datos que son carácteres nos da el total de datos que
+# Arroja informaciÃ³n estadistica sobre cada columna que tenga valores numÃ©ricos
+# y al parecer en los datos que son carÃ¡cteres nos da el total de datos que
 # hay de cada categoria.
 
 boxplot(my_iris)
 # Diagrama de caja
 
 pairs(my_iris)
-# Otro tipo de gráfica, con puntos. ¿Qué quiere decir?
-# Distribución de los datos.
+# Otro tipo de grÃ¡fica, con puntos. Â¿QuÃ© quiere decir?
+# DistribuciÃ³n de los datos.
 
 my_iris %>% ggplot(aes(x = Petal.Length,
                        y = Sepal.Length,
@@ -62,7 +62,7 @@ my_iris %>% ggplot(aes(x = Petal.Length,
                       geom_point() + 
               ggtitle('Especies de iris',
                       subtitle = "por longuitud de petalo y sepalo")
-# Mismo tipo de gráfica que pairs() pero solo usa dos variables.
+# Mismo tipo de grÃ¡fica que pairs() pero solo usa dos variables.
 
 ####################
 ## LEER CON READR ##
@@ -93,23 +93,23 @@ my_iris_tab <- readr::read_csv(file = "https://raw.githubusercontent.com/INMEGEN
 #  Petal.Width = col_double(),
 #  Species = col_character()
 # )
-# read_csv tambinén nos arroja información sobre el nombre de las columnas y que tipo de datos contienen.
+# read_csv tambinÃ©n nos arroja informaciÃ³n sobre el nombre de las columnas y que tipo de datos contienen.
 #   Al parecer se llaman "tibble"
-# Es una versión mas moderna de los data.frame
+# Es una versiÃ³n mas moderna de los data.frame
 #   ventajas: Print mas limpio
 #             Solo algunos renglones ( no necesitmaos head())
 #             Indica dimensiones y tipos de variables ( no necesitamos str(), dim())
 #             No obliga a que los strings sean factores por default
-#             No usa rownames (¿y eso es algo bueno?)
+#             No usa rownames (Â¿y eso es algo bueno?)
 # Los tibbles pueden hacer todo lo que los data frames tradicionales
 
 str(my_iris_tab)
 
-# Cuidado los métodos de tibble no adivinan cosas como los de base.
+# Cuidado los mÃ©todos de tibble no adivinan cosas como los de base.
 
 boxplot(my_iris_tab)
 
-# ¿Por qué falló ese boxplot? ¿ Cómo solucionarlo?
+# Â¿Por quÃ© fallÃ³ ese boxplot? Â¿ CÃ³mo solucionarlo?
 #  Fallo porque la columna de Species contiene caracteres, como ya se dijo
 #  read_cvs no los convierte en factores.
 #  volviendo a utilizar as.factor???
@@ -119,8 +119,8 @@ boxplot(my_iris_tab)
 ###########################
 
 #   El paquete data.table esta orientado a big data
-#   Es una filosofía distinta a tydi; inspirada en SQL
-#   Bastante más rápido; ¿sintaxis es mas espartana?
+#   Es una filosofÃ­a distinta a tydi; inspirada en SQL
+#   Bastante mÃ¡s rÃ¡pido; Â¿sintaxis es mas espartana?
 
 my_iris_dt = data.table::fread(input = "https://raw.githubusercontent.com/INMEGEN/CienciaDeDatosConR/master/data/iris_01.csv" )
 my_iris_dt
@@ -131,7 +131,7 @@ my_iris_dt %>% str()
 ##  LEER CON Vroom  ##
 ######################
 
-# Rápido
+# RÃ¡pido
 # Eficiente con la memoria
 # Devuelve tibbles ---> tydi
 
@@ -147,17 +147,17 @@ my_iris_vroom
 readxl::read_xlsx(path = "datasets_clasicos.xlsx")
 readxl::read_xlsx(path = "datasets_clasicos.xlsx",sheet = 1)
 readxl::read_xlsx(path = "datasets_clasicos.xlsx",sheet = 2)
-#   Podemos escoger que página del excel mostrar.
+#   Podemos escoger que pÃ¡gina del excel mostrar.
 
 readxl::read_xlsx(path = "datasets_clasicos.xlsx",sheet = "USarrests")
-#   Tambien se puede escoger por nombre de la página.
+#   Tambien se puede escoger por nombre de la pÃ¡gina.
 
 readxl::read_xlsx(path = "datasets_clasicos.xlsx",sheet = 4)
-#   Aparece la primera linea de la página, la cual no queremos
+#   Aparece la primera linea de la pÃ¡gina, la cual no queremos
 #   para que solo se aprecie la tabla de datos.
 
 readxl::read_xlsx(path = "datasets_clasicos.xlsx",sheet = 4,skip = 1)
-#   Con la opción skip podemos saltar lineas que no queremos cargar
+#   Con la opciÃ³n skip podemos saltar lineas que no queremos cargar
 #   en nuestros datos
 
 ####################################
@@ -174,12 +174,12 @@ my_genes
 my_genes <- janitor::clean_names(dat = my_genes,case = "snake")
 my_genes
 #   Parece que simplemente limpia espacios en los cabezales
-#   y cambia todo a minúsculas.Además cambia el simbolo % por la palabra percent
+#   y cambia todo a minÃºsculas.AdemÃ¡s cambia el simbolo % por la palabra percent
 #   Nota: vroom te da un tibble.
 
 my_genes <- janitor::clean_names(dat = my_genes,case = "screaming_snake")
 my_genes
-#   Cambia los cabezales a mayúsculas y espacios por una barra baja
+#   Cambia los cabezales a mayÃºsculas y espacios por una barra baja
 
 my_genes <- janitor::clean_names(dat = my_genes,case = "lower_camel")
 my_genes
@@ -187,15 +187,15 @@ my_genes
 
 my_genes <- janitor::clean_names(dat = my_genes,case = "upper_camel")
 my_genes
-#   Combinación entre matusculas y minúsculas sin espacios
+#   CombinaciÃ³n entre matusculas y minÃºsculas sin espacios
 
 my_genes <- janitor::clean_names(dat = my_genes,case = "lower_upper")
 my_genes
-#   Combinacion entre palabras con mayúsculas y minúsculas
+#   Combinacion entre palabras con mayÃºsculas y minÃºsculas
 
 my_genes <- janitor::clean_names(dat = my_genes,case = "upper_lower")
 my_genes
-#   Lo mismo que la anterior pero al revés
+#   Lo mismo que la anterior pero al revÃ©s
 
 ##########################
 ## OTROS TIPOS DE DATOS ##
@@ -209,16 +209,16 @@ my_genes
 ## TIPOS DE DATOS EN R ##
 #########################
 
-# Ordenados de menos a mas ¿flexibles?
+# Ordenados de menos a mas Â¿flexibles?
 
-#Lógicos
+#LÃ³gicos
 my_logic = c(TRUE, TRUE, FALSE)
 # Esto crea un vector o una lista 
 my_logic
 # Muestra los datos dentro de la lista 
 typeof(my_logic)
 # typeof() dice que tipo de datos contiene la lista
-# Nota: si agregamos un número en la lista toma el TRUE o FALSE como 1 y 0 
+# Nota: si agregamos un nÃºmero en la lista toma el TRUE o FALSE como 1 y 0 
 
 #Enteros
 my_integer = c (7L, 2L, 5L)
@@ -241,8 +241,8 @@ typeof(my_char)
 ##  FACTORES  ##
 ################
 
-# Los factores son vectores atómicos que contienen valores predefinidos.
-# Permiten almacenar variables categóricas
+# Los factores son vectores atÃ³micos que contienen valores predefinidos.
+# Permiten almacenar variables categÃ³ricas
 my_factor <- factor(c("interno","externo","externo","interno"))
 my_factor  
 View(my_factor)
@@ -251,11 +251,11 @@ levels(my_factor)
 #levels: creo que son las clases que se encuentran en el vector.
 
 class(my_factor)
-#Los factores son en realidad numéricos
+#Los factores son en realidad numÃ©ricos
 
 typeof(my_factor)
 as.numeric(my_factor)
-#Parece ser que se les asiga una numeración a los diferentes tipos de clases.
+#Parece ser que se les asiga una numeraciÃ³n a los diferentes tipos de clases.
 
 ############################
 ############################
@@ -272,15 +272,15 @@ my_cars <- read.table(file ="https://raw.githubusercontent.com/INMEGEN/CienciaDe
 
 my_cars %>% head()
 #head(my_cars)
-#Practicamente gastas mas código si lo usas solo para una función
-#pero parece práctico si lo usas con varias.
+#Practicamente gastas mas cÃ³digo si lo usas solo para una funciÃ³n
+#pero parece prÃ¡ctico si lo usas con varias.
 
 str(object = my_cars)
 summary(object = my_cars)
 boxplot(my_cars)
 pairs(my_cars)
 
-# ¿Cuántas variables y observaciones tiene el conjunto de datos mtcars?
+# Â¿CuÃ¡ntas variables y observaciones tiene el conjunto de datos mtcars?
 
 str(object = my_cars)
 # 32 observaciones (marca del auto) y 12 variables (especificaciones del auto)
@@ -311,7 +311,7 @@ my_cars %>% ggplot(aes(x = hp,
 
 
 ###########################
-##  ¿MAS COMANDOS DE R?  ##
+##  Â¿MAS COMANDOS DE R?  ##
 ###########################
 
 #saveRDS() --> RDS --> Guarda un objeto
@@ -320,7 +320,7 @@ my_cars %>% ggplot(aes(x = hp,
 
 #save.image() --> RData --> Guarda todos los objetos en el espacio de trabajo nombrados
 
-#   Creo que ya lo hace Rstdio en windows cada que cierro seción
+#   Creo que ya lo hace Rstdio en windows cada que cierro seciÃ³n
 #   Cuando vuelvo a abrir se quedan guardados los dataset cargados 
 #   Lo que no se guarda son las imagenes ploteadas.
 
@@ -343,7 +343,7 @@ load("results/sesion_01.RData")
 otro_iris_mas %>% head()
 my_iris_vroom
 
-#   Todos los paquetes de lectura tienen su versión de lectura
+#   Todos los paquetes de lectura tienen su versiÃ³n de lectura
 #   read.table <--> write.table
 #   data.table::fread <--> data.table::fwrite
 #   vroom::vroom <--> vroom::vroom_write
@@ -354,12 +354,12 @@ write.table(x = my_cars,
             quote = FALSE,
             row.names = TRUE,
             col.names = TRUE)
-#   Creo que lo que hace esta función es crear un nuevo archivo 
+#   Creo que lo que hace esta funciÃ³n es crear un nuevo archivo 
 #   en este caso me creo un archivo de texto (bloc de notas)
 #   con el nombre mmtcar.txt de manera que ya aparecen los datos ordenados,
-#   separados por tabulación, con las filas numeradas y las columnas nombradas.
+#   separados por tabulaciÃ³n, con las filas numeradas y las columnas nombradas.
 
-#   ¿Qué pasa si cambiamos los parámtetros?
+#   Â¿QuÃ© pasa si cambiamos los parÃ¡mtetros?
 
 write.table(x = my_cars,
             file = "mmtcar1.txt",
@@ -413,7 +413,7 @@ iris_esp_dt <- data.table::fread(input = "https://raw.githubusercontent.com/INME
 iris_esp_dt <- janitor::clean_names(dat = iris_esp_dt,case = "snake")
 iris_esp_dt <- janitor::clean_names(dat = iris_esp_dt,case = "screaming_snake")
 iris_esp_dt <- janitor::clean_names(dat = iris_esp_dt,case = "upper_lower")
-#   Nota: parece que de entraba data.table cambia acentos por símbolos extraños
+#   Nota: parece que de entraba data.table cambia acentos por sÃ­mbolos extraÃ±os
 #         y tambien ya omite los comentarios #
 
 #   Leer con vroom
@@ -426,7 +426,7 @@ iris_esp_vroom <- janitor::clean_names(dat = iris_esp_vroom,case = "snake")
 
 mun_fem <- readxl::read_xlsx(path = "mundiales_femenil.xlsx",skip = 1)
 
-#   Ya los cargué, no sé que mas hacerles...
+#   Ya los carguÃ©, no sÃ© que mas hacerles...
 
 
 
