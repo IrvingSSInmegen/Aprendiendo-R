@@ -12,7 +12,7 @@ my_cars <- read.table(file ="https://raw.githubusercontent.com/INMEGEN/CienciaDe
                       stringsAsFactors = TRUE)
 head(my_cars)
 
-# ¿Cuántas variables y observaciones tiene el conjunto de datos mtcars?
+# Â¿CuÃ¡ntas variables y observaciones tiene el conjunto de datos mtcars?
 
 str(object = my_cars)
 # 32 observaciones (marca del auto) y 12 variables (especificaciones del auto)
@@ -35,12 +35,12 @@ my_iris_tab <- readr::read_csv(file = "https://raw.githubusercontent.com/INMEGEN
 
 boxplot(my_iris_tab)
 
-# ¿Por qué falló ese bosplot? 
+# Â¿Por quÃ© fallÃ³ ese bosplot? 
 #  Fallo porque la columna de Species contiene caracteres, como ya se dijo
 #  read_cvs no los convierte en factores, si bien los determina como clases
-#  pero no les establece un valor numérico.
+#  pero no les establece un valor numÃ©rico.
 #
-#  ¿ Cómo solucionarlo?
+#  Â¿ CÃ³mo solucionarlo?
 #  volviendo a utilizar as.factor???
 
 # Entiendo que as.factor() convierte un vector en factores, osea
@@ -75,7 +75,7 @@ iris_esp_dt <- data.table::fread(input = "https://raw.githubusercontent.com/INME
 iris_esp_dt <- janitor::clean_names(dat = iris_esp_dt,case = "snake")
 iris_esp_dt <- janitor::clean_names(dat = iris_esp_dt,case = "screaming_snake")
 iris_esp_dt <- janitor::clean_names(dat = iris_esp_dt,case = "upper_lower")
-#   Nota: parece que de entraba data.table cambia acentos por símbolos extraños
+#   Nota: parece que de entraba data.table cambia acentos por sÃ­mbolos extraÃ±os
 #         y tambien ya omite los comentarios #
 
 #   Leer con vroom
@@ -88,7 +88,7 @@ iris_esp_vroom <- janitor::clean_names(dat = iris_esp_vroom,case = "snake")
 
 mun_fem <- readxl::read_xlsx(path = "mundiales_femenil.xlsx",skip = 1)
 
-#   Ya los cargué, no sé que mas hacerles...
+#   Ya los carguÃ©, no sÃ© que mas hacerles...
 
 
 
