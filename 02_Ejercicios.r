@@ -56,11 +56,11 @@ iris_esp_dr <- readr::read_csv(file = "https://raw.githubusercontent.com/INMEGEN
 View(iris_esp)
 
 iris_esp_dr <- janitor::clean_names(dat = iris_esp_dr,case = "snake")
-iris_esp <- janitor::clean_names(dat = iris_esp_dr,case = "screaming_snake")
-iris_esp <- janitor::clean_names(dat = iris_esp_dr,case = "upper_lower")
-iris_esp <- janitor::clean_names(dat = iris_esp_dr,case = "lower_upper")
-iris_esp <- janitor::clean_names(dat = iris_esp_dr,case = "upper_camel")
-iris_esp <- janitor::clean_names(dat = iris_esp_dr,case = "lower_camel")
+iris_esp_dr <- janitor::clean_names(dat = iris_esp_dr,case = "screaming_snake")
+iris_esp_dr <- janitor::clean_names(dat = iris_esp_dr,case = "upper_lower")
+iris_esp_dr <- janitor::clean_names(dat = iris_esp_dr,case = "lower_upper")
+iris_esp_dr <- janitor::clean_names(dat = iris_esp_dr,case = "upper_camel")
+iris_esp_dr <- janitor::clean_names(dat = iris_esp_dr,case = "lower_camel")
 
 
 #   Se necesita saber que case de janitor aplciar primero para que queden bien los cabezales
