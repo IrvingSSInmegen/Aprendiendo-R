@@ -35,7 +35,7 @@ my_iris_tab <- readr::read_csv(file = "https://raw.githubusercontent.com/INMEGEN
 
 boxplot(my_iris_tab)
 
-# ¿Por qué falló ese bosplot? 
+# ¿Por qué falló ese boxplot? 
 #  Fallo porque la columna de Species contiene caracteres, como ya se dijo
 #  read_cvs no los convierte en factores, si bien los determina como clases
 #  pero no les establece un valor numérico.
