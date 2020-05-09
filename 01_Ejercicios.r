@@ -4,7 +4,7 @@
 ####     EJERCICIOs M2    ####
 #####                    #####
 ##############################
-##############################
+###############################
 
 my_cars <- read.table(file ="https://raw.githubusercontent.com/INMEGEN/CienciaDeDatosConR/master/data/mtcars_01.csv",
                       header = TRUE,
