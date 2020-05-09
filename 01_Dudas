@@ -3,10 +3,11 @@
 rnorm(100) %>% matrix(ncol = 2) %T>% plot() %>% str()
 
 #   -El operador %T>% me regresa el valor de str(rnorm(100) %>% matrix(ncol = 2))
-#    Creo que lo que hace el operador tee es aplicar el resultafo lo anterior a 
-#    las funciones siguientes del operador
+#    Creo que lo que hace el operador tee es aplicar el resultado anterior a 
+#    las funciones siguientes del operador pltot() y str()
+#    ¿¿Es correcto??
 
-#   -No entiendo para que funciona el pipe %$% :::
+#   -No entiendo para que funciona el pipe %$% 
 
 #    En el ejercicios de las aerolineas
 #   Logro hacer con summarise que me muestre el tiempo max en el aire de cada mes, pero
