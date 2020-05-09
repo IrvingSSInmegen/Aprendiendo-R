@@ -22,6 +22,6 @@ v <- flights %>% group_by(month) %>%
 v
 
 #   Como saco el simbolo de virgulilla? (la s acostada)
-
+#
 
 
