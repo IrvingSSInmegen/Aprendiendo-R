@@ -7,8 +7,10 @@ rnorm(100) %>% matrix(ncol = 2) %T>% plot() %>% str()
 #    las funciones siguientes del operador pltot() y str()
 #    ¿¿Es correcto??
 
+########################################################################################################################################
 #   -No entiendo para que funciona el pipe %$% 
 
+########################################################################################################################################
 #    En el ejercicios de las aerolineas
 #   Logro hacer con summarise que me muestre el tiempo max en el aire de cada mes, pero
 #   no sé como hacer para que se muestre la aerolinea que lo tiene
@@ -21,7 +23,18 @@ v <- flights %>% group_by(month) %>%
                  summarise(max_airtime = max(air_time,na.rm = TRUE))
 v
 
-#   Como saco el simbolo de virgulilla? (la s acostada)
-#
+########################################################################################################################################
 
+#   Falta completar este gráfico
+
+USArrests %>% rownames_to_column(var = "estado") %>% 
+              pivot_longer(cols = -estado,
+                           names_to = "type",
+                           values_to = "value",
+                          # AQUI FALTA UN VALOR PERO NO SALE EN EL PDF Y NO PUDE COMPLETARLO ) + 
+              ggplot(mapping = aes(x = type,
+                                   y = estado,
+                                   fill = value)) + 
+              geom_tile() + 
+              scale_fill_distiller("spectral")
 
