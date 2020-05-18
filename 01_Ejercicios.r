@@ -187,3 +187,61 @@ name3_flight <- dplyr::right_join(x =  air_name,
                                   y = flights,
                                   by = c("carrier","carrier"))
 view(name3_flight)
+
+
+
+##############################
+##############################
+#####                    #####
+####     EJERCICIOs M4    ####
+#####         1          #####
+##############################
+##############################
+
+#   Utilizando mtcars retomar la gráfica de dispersión
+#   - Agregar título a la gráfica
+#   - utilice el theme negro y blanco
+#   - genere los páneles correspondientes a la cantidad de cilindros
+
+mtcars %>% ggplot(mapping = aes(x = hp,
+                                y = mpg,
+                                fill = as.factor(cyl))) + 
+           geom_point(shape = 23, size = 2) + 
+           labs(title = "MTCARS",
+                subtitle = " caballos de fuerza vs millas por galon",
+                caption = " Si hp aumenta entonces mpg disminuye ",
+                x = "millas por galon",
+                y = "caballos de fuerza" ) + 
+          theme_linedraw() + 
+          theme(legend.position = "bottom") + 
+          scale_fill_manual(values = c("yellow","orange","red"),
+                            name = "Número de cilindros") + 
+          facet_wrap(~as.factor(cyl), scales = "free")
+
+##############################
+##############################
+#####                    #####
+####     EJERCICIOs M4    ####
+#####         2          #####
+##############################
+##############################
+
+#   Hacer un ggplot´s boxplot con MTCARs para las variables "dips" y "hp"
+
+mtcars %>% select(cyl,hp,disp) %>% tidyr::pivot_longer(cols = -cyl,
+                                                       names_to = "variables",
+                                                       values_to = "valores") %>%
+                                   ggplot(mapping = aes(x = variables,
+                                                        y = valores,
+                                                        fill = as.factor(cyl))) + 
+                                   geom_boxplot() + 
+                                   labs(title = "Desplazamiento y caballos de fuerza",
+                                        subtitle = "cyl vs hp / cyl vs disp",
+                                        caption = "Análisis estadistico de automoviles",
+                                        x = "despazamiento                   caballos de fuerza",
+                                        y = "Valor") +
+                                        theme_dark() +
+                                  theme(legend.position = "bottom") +
+                                  scale_fill_manual(values = c("blue","green","red"),
+                                                    name = " Número de cilindros") + 
+                                  facet_wrap(~variables,scales = "free")
